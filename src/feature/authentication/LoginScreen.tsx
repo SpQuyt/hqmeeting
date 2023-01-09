@@ -1,15 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { firebase } from '@react-native-firebase/auth';
 import { Themes } from 'assets/themes';
-import { StyledButton, StyledInputForm, StyledText, StyledTouchable } from 'components/base';
+import { StyledButton, StyledInputForm } from 'components/base';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
-import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
-import { navigate } from 'navigation/NavigationService';
-import React, { FunctionComponent, useEffect, useRef } from 'react';
+import React, { FunctionComponent, useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useLogin } from 'utilities/authenticate/AuthenticateService';
 import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
 
@@ -20,10 +17,18 @@ const DEFAULT_FORM: any = {
 
 const LoginScreen: FunctionComponent = () => {
     const passwordRef = useRef<any>(null);
-    const { requestLogin, loading } = useLogin();
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = async () => {
-        await firebase.auth().signInWithEmailAndPassword('spquyt@gmail.com', '20022022');
+    const handleLogin = async (option: any) => {
+        try {
+            const { email, password } = option;
+            setIsLoading(true);
+            await firebase.auth().signInWithEmailAndPassword(email, password);
+        } catch (err) {
+            alert(err);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const yupSchema = yup.object().shape({
@@ -42,21 +47,6 @@ const LoginScreen: FunctionComponent = () => {
         handleSubmit,
     } = form;
 
-    const doRegister = () => {
-        navigate(AUTHENTICATE_ROUTE.REGISTER);
-    };
-    const goToForgotPassword = () => {
-        navigate(AUTHENTICATE_ROUTE.FORGOT_PASS);
-    };
-
-    useEffect(() => {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                console.log('user', user);
-            }
-        });
-    });
-
     return (
         <KeyboardAwareScrollView
             contentContainerStyle={styles.container}
@@ -65,8 +55,8 @@ const LoginScreen: FunctionComponent = () => {
             showsVerticalScrollIndicator={false}
             enableResetScrollToCoords={false}
         >
-            <StyledOverlayLoading visible={loading} />
-            <SafeAreaView style={styles.body}>
+            <StyledOverlayLoading visible={isLoading} />
+            <View style={styles.body}>
                 <FormProvider {...form}>
                     <StyledInputForm
                         name="email"
@@ -94,15 +84,7 @@ const LoginScreen: FunctionComponent = () => {
                         { backgroundColor: isValid ? `rgba(252, 177, 3, 1)` : `rgba(252, 177, 3, 0.5)` },
                     ]}
                 />
-
-                <StyledTouchable onPress={goToForgotPassword} customStyle={styles.registerButton}>
-                    <StyledText i18nText="authen.login.forgotPasswordText" />
-                </StyledTouchable>
-
-                <StyledTouchable onPress={doRegister} customStyle={styles.registerButton}>
-                    <StyledText i18nText="authen.login.registerText" />
-                </StyledTouchable>
-            </SafeAreaView>
+            </View>
         </KeyboardAwareScrollView>
     );
 };

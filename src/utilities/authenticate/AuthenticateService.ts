@@ -1,3 +1,4 @@
+import { firebase } from '@react-native-firebase/auth';
 import { TypeLoginRequest } from 'api/interface/authenticate';
 import { login } from 'api/modules/api-app/authenticate';
 import request from 'api/request';
@@ -6,7 +7,7 @@ import { store } from 'app-redux/store';
 import AlertMessage from 'components/base/AlertMessage';
 import { useState } from 'react';
 import { logger } from 'utilities/helper';
-import { deleteTagOneSignal, pushTagMember } from 'utilities/notification';
+import { pushTagMember } from 'utilities/notification';
 
 const AUTH_URL_REFRESH_TOKEN = '/refreshToken';
 
@@ -26,8 +27,9 @@ const AuthenticateService = {
             refresh_token: inputRefreshToken,
         }),
     logOut: () => {
-        store.dispatch(userInfoActions.logOut());
-        deleteTagOneSignal();
+        firebase.auth().signOut();
+        // store.dispatch(userInfoActions.logOut());
+        // deleteTagOneSignal();
     },
     handlerLogin: (token: Record<string, string>) => {
         const { userInfo } = store.getState();

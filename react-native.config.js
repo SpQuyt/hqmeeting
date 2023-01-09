@@ -6,6 +6,11 @@ module.exports = {
                 android: null,
             },
         },
+        'react-native-vector-icons': {
+            platforms: {
+                ios: null,
+            },
+        },
     },
     project: {
         android: {},

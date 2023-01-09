@@ -1,9 +1,10 @@
 import React from 'react';
-import { Platform, View, Image, StyleSheet } from 'react-native';
+import { Platform, View, StyleSheet } from 'react-native';
 import Metrics from 'assets/metrics';
 import { StyledText, StyledTouchable } from 'components/base';
 import { Themes } from 'assets/themes';
 import Size from 'assets/sizes';
+import { Icon } from 'react-native-elements';
 
 const StyledTabBar = ({ state, descriptors, navigation }: any) => {
     return (
@@ -33,19 +34,18 @@ const StyledTabBar = ({ state, descriptors, navigation }: any) => {
                 return (
                     <StyledTouchable
                         accessibilityRole="button"
-                        // accessibilityStates={isFocused ? ['selected'] : []}
                         accessibilityLabel={options.tabBarAccessibilityLabel}
                         testID={options.tabBarTestID}
                         onPress={onPress}
                         onLongPress={onLongPress}
                         key={route.key}
-                        customStyle={[styles.tabButton]}>
-                        <Image
-                            source={options?.icon}
-                            style={[
-                                styles.tabIcon,
-                                { tintColor: isFocused ? Themes.COLORS.primary : Themes.COLORS.textPrimary },
-                            ]}
+                        customStyle={[styles.tabButton]}
+                    >
+                        <Icon
+                            name={options?.icon}
+                            size={30}
+                            color={isFocused ? Themes.COLORS.primary : Themes.COLORS.textPrimary}
+                            style={{ marginBottom: 5 }}
                         />
                         <StyledText
                             customStyle={[
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     },
     tabButton: {
         alignItems: 'center',
+        width: '25%',
     },
     tabIcon: {
         width: 17,

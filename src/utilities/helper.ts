@@ -3,7 +3,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import AlertMessage from 'components/base/AlertMessage';
 import i18next from 'i18next';
 import { DevSettings, Platform } from 'react-native';
-import Picker from 'react-native-picker';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import codePush from 'react-native-code-push';
 import Config from 'react-native-config';
@@ -27,15 +26,6 @@ export function logger(msg: any, isWarning?: boolean, params?: any): void {
         if (params) console.warn(msg, params);
         else console.warn(msg);
     }
-}
-
-export function initPicker(params?: any) {
-    Picker.init({
-        pickerTextEllipsisLen: 10,
-        pickerCancelBtnText: i18next.t('common.cancel'),
-        pickerConfirmBtnText: i18next.t('common.confirm'),
-        ...params,
-    });
 }
 
 export const addMenuClearAsyncStorage = () => {

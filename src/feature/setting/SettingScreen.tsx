@@ -4,7 +4,7 @@ import StyledText from 'components/base/StyledText';
 import { StyledButton } from 'components/base';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 
-const SettingView: FunctionComponent = () => {
+const SettingScreen: FunctionComponent = () => {
     return (
         <View style={styles.container}>
             <StyledText originValue={'Setting'} />
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SettingView;
+export default SettingScreen;

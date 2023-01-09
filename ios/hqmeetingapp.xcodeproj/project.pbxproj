@@ -13,7 +13,22 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1F4C84D7296C3FBE001C9DF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F4C84D6296C3FBE001C9DF3 /* GoogleService-Info.plist */; };
 		1F4C84D8296C3FBE001C9DF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F4C84D6296C3FBE001C9DF3 /* GoogleService-Info.plist */; };
-		436DC7D1D23542B889A55CF4 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 635B3BCDDEF04F658975D6D7 /* Config.xcconfig */; };
+		1FF94A9D296C8443006879B6 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A8D296C8443006879B6 /* Fontisto.ttf */; };
+		1FF94A9E296C8443006879B6 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A8E296C8443006879B6 /* Octicons.ttf */; };
+		1FF94A9F296C8443006879B6 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A8F296C8443006879B6 /* Feather.ttf */; };
+		1FF94AA0296C8443006879B6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A90296C8443006879B6 /* Entypo.ttf */; };
+		1FF94AA1296C8443006879B6 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A91296C8443006879B6 /* FontAwesome5_Brands.ttf */; };
+		1FF94AA2296C8443006879B6 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A92296C8443006879B6 /* MaterialCommunityIcons.ttf */; };
+		1FF94AA3296C8443006879B6 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A93296C8443006879B6 /* AntDesign.ttf */; };
+		1FF94AA4296C8443006879B6 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A94296C8443006879B6 /* Foundation.ttf */; };
+		1FF94AA5296C8443006879B6 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A95296C8443006879B6 /* Ionicons.ttf */; };
+		1FF94AA6296C8443006879B6 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A96296C8443006879B6 /* FontAwesome5_Solid.ttf */; };
+		1FF94AA7296C8443006879B6 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A97296C8443006879B6 /* FontAwesome5_Regular.ttf */; };
+		1FF94AA8296C8443006879B6 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A98296C8443006879B6 /* FontAwesome.ttf */; };
+		1FF94AA9296C8443006879B6 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A99296C8443006879B6 /* Zocial.ttf */; };
+		1FF94AAA296C8443006879B6 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A9A296C8443006879B6 /* EvilIcons.ttf */; };
+		1FF94AAB296C8443006879B6 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A9B296C8443006879B6 /* SimpleLineIcons.ttf */; };
+		1FF94AAC296C8443006879B6 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FF94A9C296C8443006879B6 /* MaterialIcons.ttf */; };
 		4E941C1CF985395569DC1AE4 /* Pods_hqmeetingapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 871165E5A1C73E1D8B0ADD4D /* Pods_hqmeetingapp.framework */; };
 		67D433EDD89BE8F5D57EA1DE /* Pods_hqmeetingapp_hqmeetingappTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EF22808E90E2EA3FF4F45F /* Pods_hqmeetingapp_hqmeetingappTests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -40,6 +55,22 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hqmeetingapp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hqmeetingapp/main.m; sourceTree = "<group>"; };
 		1F4C84D6296C3FBE001C9DF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1FF94A8D296C8443006879B6 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		1FF94A8E296C8443006879B6 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		1FF94A8F296C8443006879B6 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		1FF94A90296C8443006879B6 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		1FF94A91296C8443006879B6 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		1FF94A92296C8443006879B6 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		1FF94A93296C8443006879B6 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		1FF94A94296C8443006879B6 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		1FF94A95296C8443006879B6 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		1FF94A96296C8443006879B6 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		1FF94A97296C8443006879B6 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		1FF94A98296C8443006879B6 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		1FF94A99296C8443006879B6 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		1FF94A9A296C8443006879B6 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		1FF94A9B296C8443006879B6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		1FF94A9C296C8443006879B6 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-hqmeetingapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hqmeetingapp.debug.xcconfig"; path = "Target Support Files/Pods-hqmeetingapp/Pods-hqmeetingapp.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-hqmeetingapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hqmeetingapp.release.xcconfig"; path = "Target Support Files/Pods-hqmeetingapp/Pods-hqmeetingapp.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-hqmeetingapp-hqmeetingappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hqmeetingapp-hqmeetingappTests.debug.xcconfig"; path = "Target Support Files/Pods-hqmeetingapp-hqmeetingappTests/Pods-hqmeetingapp-hqmeetingappTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +132,30 @@
 			name = hqmeetingapp;
 			sourceTree = "<group>";
 		};
+		1FF94A8C296C8443006879B6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1FF94A8D296C8443006879B6 /* Fontisto.ttf */,
+				1FF94A8E296C8443006879B6 /* Octicons.ttf */,
+				1FF94A8F296C8443006879B6 /* Feather.ttf */,
+				1FF94A90296C8443006879B6 /* Entypo.ttf */,
+				1FF94A91296C8443006879B6 /* FontAwesome5_Brands.ttf */,
+				1FF94A92296C8443006879B6 /* MaterialCommunityIcons.ttf */,
+				1FF94A93296C8443006879B6 /* AntDesign.ttf */,
+				1FF94A94296C8443006879B6 /* Foundation.ttf */,
+				1FF94A95296C8443006879B6 /* Ionicons.ttf */,
+				1FF94A96296C8443006879B6 /* FontAwesome5_Solid.ttf */,
+				1FF94A97296C8443006879B6 /* FontAwesome5_Regular.ttf */,
+				1FF94A98296C8443006879B6 /* FontAwesome.ttf */,
+				1FF94A99296C8443006879B6 /* Zocial.ttf */,
+				1FF94A9A296C8443006879B6 /* EvilIcons.ttf */,
+				1FF94A9B296C8443006879B6 /* SimpleLineIcons.ttf */,
+				1FF94A9C296C8443006879B6 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = hqmeetingapp/Fonts;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				1FF94A8C296C8443006879B6 /* Fonts */,
 				1F4C84D6296C3FBE001C9DF3 /* GoogleService-Info.plist */,
 				635B3BCDDEF04F658975D6D7 /* Config.xcconfig */,
 				13B07FAE1A68108700A75B9A /* hqmeetingapp */,
@@ -189,7 +245,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				26E6D59F5FFF449484201064 /* ShellScript */,
+				26E6D59F5FFF449484201064 /*  */,
 				E9FF9AE9368C18F120C698B3 /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
@@ -207,7 +263,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -250,9 +306,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF94AA7296C8443006879B6 /* FontAwesome5_Regular.ttf in Resources */,
+				1FF94A9E296C8443006879B6 /* Octicons.ttf in Resources */,
+				1FF94AA1296C8443006879B6 /* FontAwesome5_Brands.ttf in Resources */,
+				1FF94AA5296C8443006879B6 /* Ionicons.ttf in Resources */,
+				1FF94AAC296C8443006879B6 /* MaterialIcons.ttf in Resources */,
+				1FF94AA6296C8443006879B6 /* FontAwesome5_Solid.ttf in Resources */,
+				1FF94AAB296C8443006879B6 /* SimpleLineIcons.ttf in Resources */,
+				1FF94AA0296C8443006879B6 /* Entypo.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				1FF94AA3296C8443006879B6 /* AntDesign.ttf in Resources */,
+				1FF94AA9296C8443006879B6 /* Zocial.ttf in Resources */,
+				1FF94AA4296C8443006879B6 /* Foundation.ttf in Resources */,
+				1FF94A9F296C8443006879B6 /* Feather.ttf in Resources */,
+				1FF94AAA296C8443006879B6 /* EvilIcons.ttf in Resources */,
 				1F4C84D7296C3FBE001C9DF3 /* GoogleService-Info.plist in Resources */,
-				436DC7D1D23542B889A55CF4 /* Config.xcconfig in Resources */,
+				1FF94AA8296C8443006879B6 /* FontAwesome.ttf in Resources */,
+				1FF94A9D296C8443006879B6 /* Fontisto.ttf in Resources */,
+				1FF94AA2296C8443006879B6 /* MaterialCommunityIcons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +362,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hqmeetingapp/Pods-hqmeetingapp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		26E6D59F5FFF449484201064 /* ShellScript */ = {
+		26E6D59F5FFF449484201064 /*  */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -433,13 +504,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-hqmeetingapp-hqmeetingappTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = hqmeetingappTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -460,10 +532,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-hqmeetingapp-hqmeetingappTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = hqmeetingappTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -584,7 +657,7 @@
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
 				INFOPLIST_PREPROCESS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -653,7 +726,7 @@
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
 				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
 				INFOPLIST_PREPROCESS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

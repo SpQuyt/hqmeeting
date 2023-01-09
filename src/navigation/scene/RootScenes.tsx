@@ -1,7 +1,6 @@
+import { firebase } from '@react-native-firebase/auth';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useAppSelector } from 'app-redux/hooks';
-import React from 'react';
-import isEqual from 'react-fast-compare';
+import React, { useEffect, useState } from 'react';
 import { Host } from 'react-native-portalize';
 import navigationConfigs from '../config/options';
 import { APP_ROUTE } from '../config/routes';
@@ -21,9 +20,15 @@ const AppStack = () => (
 );
 
 const Navigation: React.FunctionComponent = () => {
-    const { token } = useAppSelector(state => state.userInfo, isEqual);
+    const [currentUser, setCurrentUser] = useState<any>();
 
-    if (token) {
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(user => {
+            setCurrentUser(user || undefined);
+        });
+    });
+
+    if (currentUser) {
         return <AppStack />;
     }
     return <AuthStack />;
