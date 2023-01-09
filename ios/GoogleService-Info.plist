@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>648456271931-bl5bbg9vqdh5f7fo2qe7ltfleejorcc5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.648456271931-bl5bbg9vqdh5f7fo2qe7ltfleejorcc5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBFsCq4iFhNJZRZPxPbz1oZt4brIzjI7UQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>648456271931</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.amela.hqmeeting.dev</string>
+	<key>PROJECT_ID</key>
+	<string>hqmeet-e2192</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hqmeet-e2192.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:648456271931:ios:d8380ea24f72c5d86d841e</string>
+</dict>
+</plist>

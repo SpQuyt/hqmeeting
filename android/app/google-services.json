@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "648456271931",
+    "project_id": "hqmeet-e2192",
+    "storage_bucket": "hqmeet-e2192.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648456271931:android:488f4702175daf806d841e",
+        "android_client_info": {
+          "package_name": "com.amela.hqmeeting.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648456271931-uc9qn9bfblvh102mnjht5ibo5tgjjsvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGYQRgV4nIOfX-GRFaR6DfDFKh0tTtNNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648456271931-uc9qn9bfblvh102mnjht5ibo5tgjjsvh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "648456271931-bl5bbg9vqdh5f7fo2qe7ltfleejorcc5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amela.hqmeeting.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

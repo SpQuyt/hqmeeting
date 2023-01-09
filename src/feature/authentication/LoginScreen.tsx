@@ -1,10 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { firebase } from '@react-native-firebase/auth';
 import { Themes } from 'assets/themes';
 import { StyledButton, StyledInputForm, StyledText, StyledTouchable } from 'components/base';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
 import { navigate } from 'navigation/NavigationService';
-import React, { FunctionComponent, useRef } from 'react';
+import React, { FunctionComponent, useEffect, useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -13,13 +14,17 @@ import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
 
 const DEFAULT_FORM: any = {
-    email: 'hoan.nguyen@amela.vn',
-    password: '123123123',
+    email: 'spquyt@gmail.com',
+    password: '20022022',
 };
 
 const LoginScreen: FunctionComponent = () => {
     const passwordRef = useRef<any>(null);
     const { requestLogin, loading } = useLogin();
+
+    const handleLogin = async () => {
+        await firebase.auth().signInWithEmailAndPassword('spquyt@gmail.com', '20022022');
+    };
 
     const yupSchema = yup.object().shape({
         email: yupValidate.email(),
@@ -43,6 +48,14 @@ const LoginScreen: FunctionComponent = () => {
     const goToForgotPassword = () => {
         navigate(AUTHENTICATE_ROUTE.FORGOT_PASS);
     };
+
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                console.log('user', user);
+            }
+        });
+    });
 
     return (
         <KeyboardAwareScrollView
@@ -73,7 +86,7 @@ const LoginScreen: FunctionComponent = () => {
                 </FormProvider>
 
                 <StyledButton
-                    onPress={handleSubmit(requestLogin)}
+                    onPress={handleSubmit(handleLogin)}
                     title="authen.login.buttonLogin"
                     disabled={!isValid}
                     customStyle={[
