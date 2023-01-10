@@ -35,16 +35,16 @@ const App: FunctionComponent = () => {
     };
     useEffect(() => {
         addMenuClearAsyncStorage();
-        if (!__DEV__) {
-            codePush.sync({
-                updateDialog: undefined,
-                installMode: codePush.InstallMode.IMMEDIATE,
-                deploymentKey:
-                    Platform.OS === 'android'
-                        ? Config.CODEPUSH_ANDROID_DEVELOPMENT_KEY
-                        : Config.CODEPUSH_IOS_DEVELOPMENT_KEY,
-            });
-        }
+        // if (!__DEV__) {
+        codePush.sync({
+            updateDialog: undefined,
+            installMode: codePush.InstallMode.IMMEDIATE,
+            deploymentKey:
+                Platform.OS === 'android'
+                    ? Config.CODEPUSH_ANDROID_DEVELOPMENT_KEY
+                    : Config.CODEPUSH_IOS_DEVELOPMENT_KEY,
+        });
+        // }
     }, []);
 
     return (

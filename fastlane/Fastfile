@@ -128,28 +128,28 @@ lane :notify_ms_team_android do |options|
   else
     env_var = "[Development]"
   end
-  teams(
-    title: "#{env_var} New App Version [Android] (#{ios_app_folder_name})",
-    message: "App's successfully released!",
-    facts:[
-      {
-        "name"=>"Latest 3 commits",
-        "value"=>changelog_from_git_commits(
-          commits_count: 3,
-          pretty: "- (%ae) %s",
-        )
-      },
-      {
-        "name"=>"Warning Android",
-        "value"=>file_android_large_warning
-      },
-      {
-        "name"=>"Android",
-        "value"=>link_upload_android
-      }
-  ],
-  teams_url: teams_url
-    )
+  # teams(
+  #   title: "#{env_var} New App Version [Android] (#{ios_app_folder_name})",
+  #   message: "App's successfully released!",
+  #   facts:[
+  #     {
+  #       "name"=>"Latest 3 commits",
+  #       "value"=>changelog_from_git_commits(
+  #         commits_count: 3,
+  #         pretty: "- (%ae) %s",
+  #       )
+  #     },
+  #     {
+  #       "name"=>"Warning Android",
+  #       "value"=>file_android_large_warning
+  #     },
+  #     {
+  #       "name"=>"Android",
+  #       "value"=>link_upload_android
+  #     }
+  # ],
+  # teams_url: teams_url
+  #   )
 end
 # ======================================================================================
 # ======================================iOS=============================================
@@ -226,28 +226,28 @@ lane :notify_ms_team_ios do |options|
   else
     env_var = "[Development]"
   end
-  teams(
-    title: "#{env_var} New App Version [iOS] (#{ios_app_folder_name})",
-    message: "App's successfully released!",
-    facts:[
-      {
-        "name"=>"Latest 3 commits",
-        "value"=>changelog_from_git_commits(
-          commits_count: 3,
-          pretty: "- (%ae) %s",
-        )
-      },
-      {
-        "name"=>"Warning iOS",
-        "value"=>file_ios_large_warning
-      },
-      {
-        "name"=>"iOS",
-        "value"=>link_upload_ios
-      },
-  ],
-  teams_url: teams_url
-  )
+  # teams(
+  #   title: "#{env_var} New App Version [iOS] (#{ios_app_folder_name})",
+  #   message: "App's successfully released!",
+  #   facts:[
+  #     {
+  #       "name"=>"Latest 3 commits",
+  #       "value"=>changelog_from_git_commits(
+  #         commits_count: 3,
+  #         pretty: "- (%ae) %s",
+  #       )
+  #     },
+  #     {
+  #       "name"=>"Warning iOS",
+  #       "value"=>file_ios_large_warning
+  #     },
+  #     {
+  #       "name"=>"iOS",
+  #       "value"=>link_upload_ios
+  #     },
+  # ],
+  # teams_url: teams_url
+  # )
 end
 # ======================================================================================
 # =================================Android + iOS========================================
@@ -274,36 +274,36 @@ lane :notify_ms_team do |options|
   else
     env_var = "[Development]"
   end
-  teams(
-    title: "#{env_var} New App Version (#{ios_app_folder_name})",
-    message: "App's successfully released!",
-    facts:[
-      {
-        "name"=>"Latest 3 commits",
-        "value"=>changelog_from_git_commits(
-          commits_count: 3,
-          pretty: "- (%ae) %s",
-        )
-      },
-      {
-        "name"=>"Warning iOS",
-        "value"=>file_ios_large_warning
-      },
-      {
-        "name"=>"iOS",
-        "value"=>link_upload_ios
-      },
-      {
-        "name"=>"Warning Android",
-        "value"=>file_android_large_warning
-      },
-      {
-        "name"=>"Android",
-        "value"=>link_upload_android
-      },
-  ],
-    teams_url: teams_url
-  )
+  # teams(
+  #   title: "#{env_var} New App Version (#{ios_app_folder_name})",
+  #   message: "App's successfully released!",
+  #   facts:[
+  #     {
+  #       "name"=>"Latest 3 commits",
+  #       "value"=>changelog_from_git_commits(
+  #         commits_count: 3,
+  #         pretty: "- (%ae) %s",
+  #       )
+  #     },
+  #     {
+  #       "name"=>"Warning iOS",
+  #       "value"=>file_ios_large_warning
+  #     },
+  #     {
+  #       "name"=>"iOS",
+  #       "value"=>link_upload_ios
+  #     },
+  #     {
+  #       "name"=>"Warning Android",
+  #       "value"=>file_android_large_warning
+  #     },
+  #     {
+  #       "name"=>"Android",
+  #       "value"=>link_upload_android
+  #     },
+  # ],
+  #   teams_url: teams_url
+  # )
 end
 # ======================================================================================
 # =====================================Execution========================================
@@ -323,16 +323,16 @@ lane :release do |options|
   upload env:options[:env]
   notify_ms_team env:options[:env]
 end
-error do |lane, exception|
-  teams(
-    title: "⛔️ Failed to build",
-    message: "Your latest change is failed to build!",
-    facts:[
-      {
-        "name"=>"Error details",
-        "value"=>exception
-      },
-    ],
-   teams_url: teams_url
-  )
-end
+# error do |lane, exception|
+#   teams(
+#     title: "⛔️ Failed to build",
+#     message: "Your latest change is failed to build!",
+#     facts:[
+#       {
+#         "name"=>"Error details",
+#         "value"=>exception
+#       },
+#     ],
+#    teams_url: teams_url
+#   )
+# end
