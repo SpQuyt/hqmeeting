@@ -10,6 +10,8 @@ import { LinkPreview } from '@flyerhq/react-native-link-preview';
 import { IPlace } from 'utilities/CommonInterface';
 import Space from 'components/common/Space';
 import { renderAddressText } from 'utilities/helper';
+import MapView, { Marker } from 'react-native-maps';
+import Metrics from 'assets/metrics';
 
 interface IProps {
     route: {
@@ -53,18 +55,38 @@ const DetailsEatingScreen = ({ route }: IProps) => {
                     </Row>
                 }
             />
-            <ScrollView style={styles.containerScroll}>
-                <TextElement h4 h4Style={{ fontWeight: 'bold' }}>
-                    Video / Ảnh
-                </TextElement>
-                <LinkPreview text={`${itemFromRoute?.link_video}`} />
-                <Space size="l" />
-                <Space size="l" />
-                <TextElement h4 h4Style={{ fontWeight: 'bold' }}>
-                    Địa chỉ
-                </TextElement>
-                <TextElement>{renderAddressText(itemFromRoute)}</TextElement>
-            </ScrollView>
+            <View style={{ flex: 1 }}>
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.containerScroll}>
+                    <TextElement h4 h4Style={{ fontWeight: 'bold' }}>
+                        Video / Ảnh
+                    </TextElement>
+                    <LinkPreview text={`${itemFromRoute?.link_video}`} />
+                    <Space size="l" />
+                    <Space size="l" />
+                    <TextElement h4 h4Style={{ fontWeight: 'bold' }}>
+                        Địa chỉ
+                    </TextElement>
+                    <TextElement>{renderAddressText(itemFromRoute)}</TextElement>
+                    <MapView
+                        style={{ height: Metrics.screenHeight * 0.3, width: '100%' }}
+                        provider="google"
+                        initialRegion={{
+                            latitude: itemFromRoute?.lat || 0,
+                            longitude: itemFromRoute?.lng || 0,
+                            latitudeDelta: 0.1,
+                            longitudeDelta: 0.08,
+                        }}
+                    >
+                        <Marker
+                            coordinate={{
+                                latitude: itemFromRoute?.lat || 0,
+                                longitude: itemFromRoute?.lng || 0,
+                            }}
+                            title={itemFromRoute?.name}
+                        />
+                    </MapView>
+                </ScrollView>
+            </View>
         </View>
     );
 };
