@@ -42,3 +42,20 @@ export type AutoCompleteType =
     | 'tel'
     | 'username'
     | 'off';
+
+export interface IPlace {
+    name?: string;
+    lat?: number;
+    lng?: number;
+    house_number?: string;
+    alley?: string;
+    lane?: string;
+    road?: string;
+    district?: string;
+    city?: string;
+    link_video?: string;
+    visited?: boolean;
+    false_place?: boolean;
+    rating?: number;
+    categories?: Array<string>;
+}

@@ -1,9 +1,10 @@
 import { firebase } from '@react-native-firebase/auth';
 import { createStackNavigator } from '@react-navigation/stack';
+import DetailsEatingScreen from 'feature/eating/DetailsEatingScreen';
 import React, { useEffect, useState } from 'react';
 import { Host } from 'react-native-portalize';
 import navigationConfigs from '../config/options';
-import { APP_ROUTE } from '../config/routes';
+import { APP_ROUTE, TAB_NAVIGATION_ROOT } from '../config/routes';
 import AuthStack from './AuthScenes';
 import MainTabContainer from './TabScenes';
 
@@ -15,6 +16,7 @@ const AppStack = () => (
     <Host>
         <MainStack.Navigator screenOptions={navigationConfigs}>
             <MainStack.Screen name={APP_ROUTE.MAIN_TAB} component={MainTabContainer} />
+            <MainStack.Screen name={TAB_NAVIGATION_ROOT.EATING_ROUTE.DETAILS} component={DetailsEatingScreen as any} />
         </MainStack.Navigator>
     </Host>
 );

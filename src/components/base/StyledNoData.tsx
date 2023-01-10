@@ -13,8 +13,8 @@ interface StyledListNoDataProps {
     customStyleText?: StyleProp<TextStyle>;
 }
 
-const NO_DATA_TEXT = 'No data';
-const RELOAD = 'Reload';
+const NO_DATA_TEXT = 'Không có dữ liệu';
+const RELOAD = 'Tải lại';
 
 const StyledNoData: FunctionComponent<StyledListNoDataProps> = (props: StyledListNoDataProps) => {
     return (

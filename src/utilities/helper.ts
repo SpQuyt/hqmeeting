@@ -4,8 +4,7 @@ import AlertMessage from 'components/base/AlertMessage';
 import i18next from 'i18next';
 import { DevSettings, Platform } from 'react-native';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import codePush from 'react-native-code-push';
-import Config from 'react-native-config';
+import { IPlace } from './CommonInterface';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -52,15 +51,8 @@ export const renderAlert = (message: string, callback: () => void) => {
     AlertMessage(i18next.t(message), '', callback, undefined, false);
 };
 
-export const getCodePushInfo = () => {
-    if (!__DEV__) {
-        codePush.sync({
-            updateDialog: undefined,
-            installMode: codePush.InstallMode.IMMEDIATE,
-            deploymentKey:
-                Platform.OS === 'android'
-                    ? Config.CODEPUSH_ANDROID_DEVELOPMENT_KEY
-                    : Config.CODEPUSH_IOS_DEVELOPMENT_KEY,
-        });
-    }
+export const renderAddressText = (curItem: IPlace) => {
+    return `số ${curItem?.house_number || ' '}, ngách ${curItem?.alley}, ngõ ${curItem?.lane}, phố ${
+        curItem?.road
+    }, quận ${curItem?.district}, ${curItem?.city}`;
 };

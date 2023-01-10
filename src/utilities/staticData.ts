@@ -1,3 +1,6 @@
+import { Themes } from 'assets/themes';
+import { StyleProp } from 'react-native';
+
 export const staticValue = {
     DEFAULT: 1,
     TIME_IMAGE_LOAD: 500,
@@ -22,3 +25,6 @@ export const dataPicker = [
 ];
 
 export const dataDropdown = ['option 1 ', 'option 2', 'option 3', 'option 4'];
+
+export const titleHeaderStyle: StyleProp<any> = { color: Themes.COLORS.white, fontWeight: 'bold' };
+export const iconButtonStyle: StyleProp<any> = { padding: 5 };

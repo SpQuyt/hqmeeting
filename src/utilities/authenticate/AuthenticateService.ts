@@ -7,7 +7,6 @@ import { store } from 'app-redux/store';
 import AlertMessage from 'components/base/AlertMessage';
 import { useState } from 'react';
 import { logger } from 'utilities/helper';
-import { pushTagMember } from 'utilities/notification';
 
 const AUTH_URL_REFRESH_TOKEN = '/refreshToken';
 
@@ -28,13 +27,9 @@ const AuthenticateService = {
         }),
     logOut: () => {
         firebase.auth().signOut();
-        // store.dispatch(userInfoActions.logOut());
-        // deleteTagOneSignal();
     },
     handlerLogin: (token: Record<string, string>) => {
-        const { userInfo } = store.getState();
         store.dispatch(userInfoActions.updateToken(token));
-        pushTagMember(userInfo.user?.id as number);
     },
 };
 

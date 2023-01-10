@@ -5,3 +5,8 @@ export enum Status {
     inactive,
     active,
 }
+
+export enum TypePlace {
+    FOOD = 1,
+    PLAY = 2,
+}
