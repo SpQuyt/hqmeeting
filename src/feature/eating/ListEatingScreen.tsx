@@ -118,35 +118,37 @@ const ListEatingScreen = () => {
                 />
             </Row>
             <Space />
-            {selectedModeIndex === 0 ? (
-                <StyledList
-                    contentContainerStyle={{ flex: 1 }}
-                    refreshing={isRefreshing}
-                    onRefresh={handleRefresh}
-                    data={currentListEat}
-                    renderItem={({ item }: { item: IPlace }) => {
-                        return (
-                            <ItemPlace
-                                item={item}
-                                onPress={curItem => {
-                                    navigate(TAB_NAVIGATION_ROOT.EATING_ROUTE.DETAILS, { itemFromRoute: curItem });
-                                }}
-                                onDelete={async curItem => {
-                                    try {
-                                        setIsLoading(true);
-                                        await deletePlaceAPI(curItem?.id || '');
-                                        await getUserData();
-                                    } catch (err) {
-                                        AlertMessage(`${err}`);
-                                    } finally {
-                                        setIsLoading(false);
-                                    }
-                                }}
-                            />
-                        );
-                    }}
-                />
-            ) : null}
+            <View style={{ flex: 1 }}>
+                {selectedModeIndex === 0 ? (
+                    <StyledList
+                        contentContainerStyle={{ flexGrow: 1 }}
+                        refreshing={isRefreshing}
+                        onRefresh={handleRefresh}
+                        data={currentListEat}
+                        renderItem={({ item }: { item: IPlace }) => {
+                            return (
+                                <ItemPlace
+                                    item={item}
+                                    onPress={curItem => {
+                                        navigate(TAB_NAVIGATION_ROOT.EATING_ROUTE.DETAILS, { itemFromRoute: curItem });
+                                    }}
+                                    onDelete={async curItem => {
+                                        try {
+                                            setIsLoading(true);
+                                            await deletePlaceAPI(curItem?.id || '');
+                                            await getUserData();
+                                        } catch (err) {
+                                            AlertMessage(`${err}`);
+                                        } finally {
+                                            setIsLoading(false);
+                                        }
+                                    }}
+                                />
+                            );
+                        }}
+                    />
+                ) : null}
+            </View>
         </View>
     );
 };
