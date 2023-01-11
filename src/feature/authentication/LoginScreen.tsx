@@ -10,9 +10,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
 
+// const DEFAULT_FORM: any = {
+//     email: 'spquyt@gmail.com',
+//     password: '20022022',
+// };
+
 const DEFAULT_FORM: any = {
-    email: 'spquyt@gmail.com',
-    password: '20022022',
+    email: '',
+    password: '',
 };
 
 const LoginScreen: FunctionComponent = () => {
