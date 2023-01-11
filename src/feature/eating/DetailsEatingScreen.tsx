@@ -41,7 +41,7 @@ const DetailsEatingScreen = ({ route }: IProps) => {
                 }
                 centerComponent={
                     <TextElement h4 h4Style={titleHeaderStyle}>
-                        {itemFromRoute?.name}
+                        Chi tiết địa điểm
                     </TextElement>
                 }
                 rightComponent={
@@ -57,6 +57,10 @@ const DetailsEatingScreen = ({ route }: IProps) => {
             />
             <View style={{ flex: 1 }}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.containerScroll}>
+                    <Row justify="center">
+                        <TextElement h2>{itemFromRoute?.name}</TextElement>
+                    </Row>
+                    <Space />
                     <TextElement h4 h4Style={{ fontWeight: 'bold' }}>
                         Video / Ảnh
                     </TextElement>
