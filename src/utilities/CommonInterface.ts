@@ -1,3 +1,5 @@
+import { TypePlace } from './enum';
+
 export type TextContentType =
     | 'none'
     | 'URL'
@@ -44,6 +46,7 @@ export type AutoCompleteType =
     | 'off';
 
 export interface IPlace {
+    id?: string;
     name?: string;
     lat?: number;
     lng?: number;
@@ -58,4 +61,7 @@ export interface IPlace {
     false_place?: boolean;
     rating?: number;
     categories?: Array<string>;
+    type: TypePlace;
+    created_at?: number;
+    last_updated_at?: number;
 }

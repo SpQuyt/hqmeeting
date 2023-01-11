@@ -52,7 +52,8 @@ export const renderAlert = (message: string, callback: () => void) => {
 };
 
 export const renderAddressText = (curItem: IPlace) => {
-    return `số ${curItem?.house_number || ' '}, ngách ${curItem?.alley}, ngõ ${curItem?.lane}, phố ${
-        curItem?.road
-    }, quận ${curItem?.district}, ${curItem?.city}`;
+    // return `số ${curItem?.house_number || ' '}, ngách ${curItem?.alley}, ngõ ${curItem?.lane}, phố ${
+    //     curItem?.road
+    // }, quận ${curItem?.district}, ${curItem?.city}`;
+    return `${curItem?.road?.[0]?.toUpperCase()}${curItem?.road?.substring(1, curItem?.road?.length)}`;
 };

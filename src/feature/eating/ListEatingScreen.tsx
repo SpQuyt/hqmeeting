@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Icon, Header, Text as TextElement, ButtonGroup } from 'react-native-elements';
-import { getListEatAPI } from 'api/modules/api-app/places';
+import { createPlaceAPI, deletePlaceAPI, getListEatAPI } from 'api/modules/api-app/places';
 import { StyledList } from 'components/base';
 import { Themes } from 'assets/themes';
 import { iconButtonStyle, titleHeaderStyle } from 'utilities/staticData';
@@ -13,18 +13,33 @@ import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import Space from 'components/common/Space';
 import Metrics from 'assets/metrics';
 import ModalizeManager from 'components/base/modal/ModalizeManager';
+import ModalFormAddPlaces from 'components/common/ModalFormAddPlaces';
+import AlertMessage from 'components/base/AlertMessage';
+import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 
 const ListEatingScreen = () => {
     const [selectedModeIndex, setSelectedModeIndex] = useState(0);
     const [currentListEat, setCurrentListEat] = useState([]);
     const [isRefreshing, setIsRefreshing] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const modalize = ModalizeManager();
     const getUserData = async () => {
         try {
             const newListEat = await getListEatAPI();
             setCurrentListEat(newListEat);
         } catch (err) {
-            console.log(err);
+            AlertMessage(`${err}`);
+        }
+    };
+
+    const addUserData = async (data: IPlace) => {
+        try {
+            setIsLoading(true);
+            await createPlaceAPI(data);
+        } catch (err) {
+            AlertMessage(`${err}`);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -49,6 +64,7 @@ const ListEatingScreen = () => {
 
     return (
         <View style={styles.container}>
+            <StyledOverlayLoading visible={isLoading} />
             <Header
                 backgroundColor={Themes.COLORS.primary}
                 centerComponent={
@@ -63,19 +79,13 @@ const ListEatingScreen = () => {
                             onPress={() => {
                                 modalize.show(
                                     'addFood',
-                                    <View style={{ height: Metrics.screenHeight * 0.9, padding: 10 }}>
-                                        <Row>
-                                            <TextElement h1>Thêm địa điểm</TextElement>
-                                            <TouchableOpacity
-                                                style={iconButtonStyle}
-                                                onPress={() => {
-                                                    modalize.dismiss('addFood');
-                                                }}
-                                            >
-                                                <Icon name="close" color="black" />
-                                            </TouchableOpacity>
-                                        </Row>
-                                    </View>,
+                                    <ModalFormAddPlaces
+                                        onConfirm={async data => {
+                                            modalize.dismiss('addFood');
+                                            await addUserData(data);
+                                            await getUserData();
+                                        }}
+                                    />,
                                     {
                                         modalStyle: {
                                             backgroundColor: Themes.COLORS.blue,
@@ -87,6 +97,7 @@ const ListEatingScreen = () => {
                                             justifyContent: 'flex-end',
                                             alignItems: 'center',
                                         },
+                                        panGestureEnabled: false,
                                     },
                                 );
                             }}
@@ -119,6 +130,17 @@ const ListEatingScreen = () => {
                                 item={item}
                                 onPress={curItem => {
                                     navigate(TAB_NAVIGATION_ROOT.EATING_ROUTE.DETAILS, { itemFromRoute: curItem });
+                                }}
+                                onDelete={async curItem => {
+                                    try {
+                                        setIsLoading(true);
+                                        await deletePlaceAPI(curItem?.id || '');
+                                        await getUserData();
+                                    } catch (err) {
+                                        AlertMessage(`${err}`);
+                                    } finally {
+                                        setIsLoading(false);
+                                    }
                                 }}
                             />
                         );

@@ -8,13 +8,15 @@ import { ListItem, Chip, AirbnbRating, Icon, Text, Card } from 'react-native-ele
 import { LinkPreview } from '@flyerhq/react-native-link-preview';
 import { iconButtonStyle } from 'utilities/staticData';
 import { renderAddressText } from 'utilities/helper';
+import AlertMessage from 'components/base/AlertMessage';
 
 interface IProps {
     item: IPlace;
     onPress(item: IPlace): void;
+    onDelete(item: IPlace): void;
 }
 
-const ItemPlace = ({ item, onPress }: IProps) => {
+const ItemPlace = ({ item, onPress, onDelete }: IProps) => {
     const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
@@ -37,7 +39,14 @@ const ItemPlace = ({ item, onPress }: IProps) => {
                             <Icon name="edit" color={Themes.COLORS.primary} />
                         </TouchableOpacity>
                         <Space size="l" />
-                        <TouchableOpacity style={iconButtonStyle} onPress={() => {}}>
+                        <TouchableOpacity
+                            style={iconButtonStyle}
+                            onPress={() => {
+                                AlertMessage('Bạn có chắc chắn muốn xoá?', '', () => {
+                                    onDelete(item);
+                                });
+                            }}
+                        >
                             <Icon name="delete" color={Themes.COLORS.borderInputError} />
                         </TouchableOpacity>
                     </Row>
@@ -52,7 +61,7 @@ const ItemPlace = ({ item, onPress }: IProps) => {
                 <ListItem.Subtitle>{renderAddressText(item)}</ListItem.Subtitle>
                 <Space />
                 <Row>
-                    <AirbnbRating showRating={false} count={5} defaultRating={item?.rating || 0} size={20} />
+                    <AirbnbRating isDisabled showRating={false} count={5} defaultRating={item?.rating || 0} size={20} />
                     <Space size={'l'} />
                     {item?.visited && (
                         <Row fullWidth={false}>

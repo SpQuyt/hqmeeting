@@ -17,8 +17,8 @@ export default {
         close: 'Close',
         noText: 'No text',
         noData: 'No data',
-        cancel: 'Cancel',
-        confirm: 'Confirm',
+        cancel: 'Huỷ',
+        confirm: 'Xác nhận',
         sendOTP: {
             title: 'Send OTP code',
             titleForgotPassword: 'If you forget your password',
