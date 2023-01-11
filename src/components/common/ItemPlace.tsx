@@ -17,10 +17,10 @@ interface IProps {
 }
 
 const ItemPlace = ({ item, onPress, onDelete }: IProps) => {
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(true);
 
     useEffect(() => {
-        setExpanded(false);
+        setExpanded(true);
     }, [item]);
 
     return (
@@ -75,14 +75,14 @@ const ItemPlace = ({ item, onPress, onDelete }: IProps) => {
                 <Space />
                 <Row justify="flex-end">
                     <Text onPress={() => setExpanded(!expanded)} style={{ color: Themes.COLORS.primary }}>
-                        Xem thêm
+                        {expanded ? 'Thu gọn' : 'Xem thêm'}
                     </Text>
                 </Row>
-                {expanded && (
+                {expanded ? (
                     <Card containerStyle={{ width: '100%', alignSelf: 'center' }}>
                         <LinkPreview text={`${item?.link_video}`} />
                     </Card>
-                )}
+                ) : null}
             </ListItem.Content>
         </ListItem>
     );
