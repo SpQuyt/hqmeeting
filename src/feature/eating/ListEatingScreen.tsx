@@ -12,11 +12,13 @@ import { navigate } from 'navigation/NavigationService';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import Space from 'components/common/Space';
 import Metrics from 'assets/metrics';
+import ModalizeManager from 'components/base/modal/ModalizeManager';
 
 const ListEatingScreen = () => {
     const [selectedModeIndex, setSelectedModeIndex] = useState(0);
     const [currentListEat, setCurrentListEat] = useState([]);
     const [isRefreshing, setIsRefreshing] = useState(false);
+    const modalize = ModalizeManager();
     const getUserData = async () => {
         try {
             const newListEat = await getListEatAPI();
@@ -56,7 +58,39 @@ const ListEatingScreen = () => {
                 }
                 rightComponent={
                     <Row fullWidth={false}>
-                        <TouchableOpacity style={iconButtonStyle} onPress={() => {}}>
+                        <TouchableOpacity
+                            style={iconButtonStyle}
+                            onPress={() => {
+                                modalize.show(
+                                    'addFood',
+                                    <View style={{ height: Metrics.screenHeight * 0.9, padding: 10 }}>
+                                        <Row>
+                                            <TextElement h1>Thêm địa điểm</TextElement>
+                                            <TouchableOpacity
+                                                style={iconButtonStyle}
+                                                onPress={() => {
+                                                    modalize.dismiss('addFood');
+                                                }}
+                                            >
+                                                <Icon name="close" color="black" />
+                                            </TouchableOpacity>
+                                        </Row>
+                                    </View>,
+                                    {
+                                        modalStyle: {
+                                            backgroundColor: Themes.COLORS.blue,
+                                        },
+                                        closeOnOverlayTap: false,
+                                        adjustToContentHeight: true,
+                                        disableScrollIfPossible: false,
+                                        containerStyleCenter: {
+                                            justifyContent: 'flex-end',
+                                            alignItems: 'center',
+                                        },
+                                    },
+                                );
+                            }}
+                        >
                             <Icon name="add" color="white" />
                         </TouchableOpacity>
                     </Row>
