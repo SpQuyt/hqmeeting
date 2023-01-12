@@ -9,19 +9,18 @@ import { TypePlace } from 'utilities/enum';
 import { Themes } from 'assets/themes';
 import { IPlace } from 'utilities/CommonInterface';
 import AlertMessage from 'components/base/AlertMessage';
-import { getListCategoriesAPI } from 'api/modules/api-app/places';
-import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import dayjs from 'dayjs';
+import { isEqual } from 'lodash';
 import Row from './Row';
 import Space from './Space';
 
 interface IProps {
+    categoriesArrFromProps: Array<{ name: string; isChecked: boolean }>;
     onConfirm(data: IPlace): void;
 }
 
-const ModalFormAddPlaces = ({ onConfirm }: IProps) => {
+const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps }: IProps) => {
     const modalize = ModalizeManager();
-    const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState<IPlace>({
         name: '',
         lat: 0,
@@ -44,51 +43,33 @@ const ModalFormAddPlaces = ({ onConfirm }: IProps) => {
             name: string;
             isChecked: boolean;
         }>
-    >([]);
-
-    const getCategories = async () => {
-        try {
-            setIsLoading(true);
-            const result = await getListCategoriesAPI();
-            setCurrentCategoriesArr(
-                result?.map((resItem: any) => {
-                    return {
-                        name: resItem?.name,
-                        isChecked: false,
-                    };
-                }),
-            );
-        } catch (err) {
-            AlertMessage(`${err}`);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    >(categoriesArrFromProps);
 
     useEffect(() => {
-        getCategories();
-    }, []);
+        if (!isEqual(categoriesArrFromProps, currentCategoriesArr)) {
+            setCurrentCategoriesArr(categoriesArrFromProps);
+        }
+    }, [categoriesArrFromProps]);
 
     return (
         <View style={{ height: Metrics.screenHeight * 0.9, padding: 10 }}>
-            <ScrollView>
-                <StyledOverlayLoading visible={isLoading} />
-                <Row>
-                    <TextElement h1>Thêm địa điểm</TextElement>
-                    <TouchableOpacity
-                        style={iconButtonStyle}
-                        onPress={() => {
-                            modalize.dismiss('addFood');
-                        }}
-                    >
-                        <Icon name="close" color="black" />
-                    </TouchableOpacity>
-                </Row>
-                <Space size="l" />
-                <Row justify="flex-end">
-                    <TextElement style={{ fontStyle: 'italic' }}>* là trường bắt buộc phải điền / chọn</TextElement>
-                </Row>
-                <Space size="l" />
+            <Row>
+                <TextElement h3>Thêm địa điểm</TextElement>
+                <TouchableOpacity
+                    style={iconButtonStyle}
+                    onPress={() => {
+                        modalize.dismiss('addFood');
+                    }}
+                >
+                    <Icon name="close" color="black" />
+                </TouchableOpacity>
+            </Row>
+            <Space size="l" />
+            <Row justify="flex-end">
+                <TextElement style={{ fontStyle: 'italic' }}>* là trường bắt buộc phải điền / chọn</TextElement>
+            </Row>
+            <Space size="l" />
+            <ScrollView contentContainerStyle={{ paddingBottom: 30 }}>
                 <TextElement style={{ marginLeft: 10, fontWeight: 'bold', fontSize: 16 }}>
                     Loại địa điểm (*)
                 </TextElement>

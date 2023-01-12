@@ -65,3 +65,9 @@ export interface IPlace {
     created_at?: number;
     last_updated_at?: number;
 }
+export interface IFilter {
+    keyword?: string;
+    visited?: boolean;
+    false_place?: boolean;
+    currentCategoriesArr?: Array<{ name: string; isChecked: boolean }>;
+}
