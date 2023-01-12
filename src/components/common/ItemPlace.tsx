@@ -12,16 +12,23 @@ import AlertMessage from 'components/base/AlertMessage';
 
 interface IProps {
     item: IPlace;
+    isCollapsedAllFromProps: boolean;
     onPress(item: IPlace): void;
     onDelete(item: IPlace): void;
 }
 
-const ItemPlace = ({ item, onPress, onDelete }: IProps) => {
-    const [expanded, setExpanded] = useState(true);
+const ItemPlace = ({ item, isCollapsedAllFromProps, onPress, onDelete }: IProps) => {
+    const [expanded, setExpanded] = useState(isCollapsedAllFromProps);
+
+    // useEffect(() => {
+    //     setExpanded(true);
+    // }, [item]);
 
     useEffect(() => {
-        setExpanded(true);
-    }, [item]);
+        if (isCollapsedAllFromProps !== expanded) {
+            setExpanded(isCollapsedAllFromProps);
+        }
+    }, [isCollapsedAllFromProps]);
 
     return (
         <ListItem
@@ -52,7 +59,7 @@ const ItemPlace = ({ item, onPress, onDelete }: IProps) => {
                     </Row>
                 </Row>
                 <Space />
-                <Row>
+                <Row justify="flex-start">
                     {item?.categories?.map((cateItem, cateIndex) => {
                         return <Chip key={`${cateIndex}`} title={cateItem} type="outline" />;
                     })}

@@ -1,6 +1,6 @@
 import { Keyboard, StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Icon, Header, Text as TextElement, ButtonGroup, Input } from 'react-native-elements';
+import { Icon, Header, Text as TextElement, ButtonGroup, Input, Button } from 'react-native-elements';
 import { createPlaceAPI, deletePlaceAPI, getListCategoriesAPI, getListEatAPI } from 'api/modules/api-app/places';
 import { StyledList } from 'components/base';
 import { Themes } from 'assets/themes';
@@ -31,6 +31,7 @@ const ListEatingScreen = () => {
         currentCategoriesArr: [],
     });
     const [defaultFilterObject, setDefaultFilterObject] = useState<IFilter>(filterObject);
+    const [isCollapsedAll, setIsCollapsedAll] = useState<boolean>(false);
     const modalize = ModalizeManager();
     const getUserData = async (filter: IFilter) => {
         try {
@@ -115,6 +116,33 @@ const ListEatingScreen = () => {
         );
     };
 
+    const handleAddPlace = () => {
+        modalize.show(
+            'addFood',
+            <ModalFormAddPlaces
+                categoriesArrFromProps={defaultFilterObject?.currentCategoriesArr || []}
+                onConfirm={async data => {
+                    modalize.dismiss('addFood');
+                    await addUserData(data);
+                    await getUserData(filterObject);
+                }}
+            />,
+            {
+                modalStyle: {
+                    backgroundColor: Themes.COLORS.blue,
+                },
+                closeOnOverlayTap: false,
+                adjustToContentHeight: true,
+                disableScrollIfPossible: false,
+                containerStyleCenter: {
+                    justifyContent: 'flex-end',
+                    alignItems: 'center',
+                },
+                panGestureEnabled: false,
+            },
+        );
+    };
+
     useEffect(() => {
         getListCategoriesData();
     }, []);
@@ -139,35 +167,7 @@ const ListEatingScreen = () => {
                 }
                 rightComponent={
                     <Row fullWidth={false}>
-                        <TouchableOpacity
-                            style={iconButtonStyle}
-                            onPress={() => {
-                                modalize.show(
-                                    'addFood',
-                                    <ModalFormAddPlaces
-                                        categoriesArrFromProps={defaultFilterObject?.currentCategoriesArr || []}
-                                        onConfirm={async data => {
-                                            modalize.dismiss('addFood');
-                                            await addUserData(data);
-                                            await getUserData(filterObject);
-                                        }}
-                                    />,
-                                    {
-                                        modalStyle: {
-                                            backgroundColor: Themes.COLORS.blue,
-                                        },
-                                        closeOnOverlayTap: false,
-                                        adjustToContentHeight: true,
-                                        disableScrollIfPossible: false,
-                                        containerStyleCenter: {
-                                            justifyContent: 'flex-end',
-                                            alignItems: 'center',
-                                        },
-                                        panGestureEnabled: false,
-                                    },
-                                );
-                            }}
-                        >
+                        <TouchableOpacity style={iconButtonStyle} onPress={handleAddPlace}>
                             <Icon name="add" color="white" />
                         </TouchableOpacity>
                     </Row>
@@ -245,12 +245,22 @@ const ListEatingScreen = () => {
                 />
                 <Space size="l" />
             </Row>
+            <Row justify="flex-end">
+                <Button
+                    title={isCollapsedAll ? 'Thu gọn tất cả' : 'Mở rộng tất cả'}
+                    onPress={() => {
+                        setIsCollapsedAll(!isCollapsedAll);
+                    }}
+                    containerStyle={{ marginRight: 15, borderRadius: 10 }}
+                    titleStyle={{ fontSize: 14 }}
+                />
+            </Row>
             {renderFilterSummaryText()}
             <Space />
             <View style={{ flex: 1 }}>
                 {selectedModeIndex === 0 ? (
                     <StyledList
-                        contentContainerStyle={{ flexGrow: 1 }}
+                        contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}
                         refreshing={isRefreshing}
                         onRefresh={handleRefresh}
                         data={currentListEat}
@@ -258,6 +268,7 @@ const ListEatingScreen = () => {
                             return (
                                 <ItemPlace
                                     item={item}
+                                    isCollapsedAllFromProps={isCollapsedAll}
                                     onPress={curItem => {
                                         navigate(TAB_NAVIGATION_ROOT.EATING_ROUTE.DETAILS, { itemFromRoute: curItem });
                                     }}
@@ -278,6 +289,9 @@ const ListEatingScreen = () => {
                     />
                 ) : null}
             </View>
+            <TouchableOpacity style={[iconButtonStyle, styles.floatButton]} onPress={handleAddPlace}>
+                <Icon name="add" color="white" size={40} />
+            </TouchableOpacity>
         </View>
     );
 };
@@ -287,5 +301,15 @@ export default ListEatingScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    floatButton: {
+        width: Metrics.screenWidth * 0.15,
+        aspectRatio: 1,
+        bottom: Metrics.screenHeight * 0.03,
+        right: Metrics.screenWidth * 0.05,
+        borderRadius: Metrics.screenWidth * 0.2,
+        backgroundColor: Themes.COLORS.primary,
+        justifyContent: 'center',
+        position: 'absolute',
     },
 });
