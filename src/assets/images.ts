@@ -22,6 +22,10 @@ const Images = {
     },
     photo: {
         defaultImage: require('./photo/img_default_image.png'),
+        cardTemplate: require('./photo/img_card_template.jpeg'),
+        cardTemplate2: require('./photo/img_card_template_2.jpeg'),
+        cardTemplate3: require('./photo/img_card_template_3.jpeg'),
+        cardTemplate4: require('./photo/img_card_template_4.jpeg'),
     },
 };
 

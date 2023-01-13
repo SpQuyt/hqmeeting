@@ -80,3 +80,9 @@ export function toNonAccentVietnamese(str?: string) {
     str = str.replace(/\u02C6|\u0306|\u031B/g, ''); // Â, Ê, Ă, Ơ, Ư
     return str;
 }
+
+export const getRandomIntInclusive = (min: number, max: number) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};

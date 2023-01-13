@@ -1,6 +1,7 @@
 import { firebase } from '@react-native-firebase/auth';
 import { createStackNavigator } from '@react-navigation/stack';
 import DetailsEatingScreen from 'feature/eating/DetailsEatingScreen';
+import TruthOrDareScreen from 'feature/game/TruthOrDareScreen';
 import React, { useEffect, useState } from 'react';
 import { Host } from 'react-native-portalize';
 import navigationConfigs from '../config/options';
@@ -17,6 +18,10 @@ const AppStack = () => (
         <MainStack.Navigator screenOptions={navigationConfigs}>
             <MainStack.Screen name={APP_ROUTE.MAIN_TAB} component={MainTabContainer} />
             <MainStack.Screen name={TAB_NAVIGATION_ROOT.EATING_ROUTE.DETAILS} component={DetailsEatingScreen as any} />
+            <MainStack.Screen
+                name={TAB_NAVIGATION_ROOT.GAMING_ROUTE.TRUTH_OR_DARE}
+                component={TruthOrDareScreen as any}
+            />
         </MainStack.Navigator>
     </Host>
 );
