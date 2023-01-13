@@ -15,9 +15,10 @@ interface IProps {
     isCollapsedAllFromProps: boolean;
     onPress(item: IPlace): void;
     onDelete(item: IPlace): void;
+    onEdit(item: IPlace): void;
 }
 
-const ItemPlace = ({ item, isCollapsedAllFromProps, onPress, onDelete }: IProps) => {
+const ItemPlace = ({ item, isCollapsedAllFromProps, onPress, onDelete, onEdit }: IProps) => {
     const [expanded, setExpanded] = useState(isCollapsedAllFromProps);
 
     // useEffect(() => {
@@ -42,7 +43,12 @@ const ItemPlace = ({ item, isCollapsedAllFromProps, onPress, onDelete }: IProps)
                 <Row>
                     <ListItem.Title style={{ fontWeight: 'bold' }}>{item?.name}</ListItem.Title>
                     <Row fullWidth={false}>
-                        <TouchableOpacity style={iconButtonStyle} onPress={() => {}}>
+                        <TouchableOpacity
+                            style={iconButtonStyle}
+                            onPress={() => {
+                                onEdit(item);
+                            }}
+                        >
                             <Icon name="edit" color={Themes.COLORS.primary} />
                         </TouchableOpacity>
                         <Space size="l" />
@@ -61,7 +67,14 @@ const ItemPlace = ({ item, isCollapsedAllFromProps, onPress, onDelete }: IProps)
                 <Space />
                 <Row justify="flex-start">
                     {item?.categories?.map((cateItem, cateIndex) => {
-                        return <Chip key={`${cateIndex}`} title={cateItem} type="outline" />;
+                        return (
+                            <Chip
+                                key={`${cateIndex}`}
+                                title={cateItem}
+                                type="outline"
+                                containerStyle={{ marginLeft: cateIndex > 0 ? 10 : 0 }}
+                            />
+                        );
                     })}
                 </Row>
                 <Space />

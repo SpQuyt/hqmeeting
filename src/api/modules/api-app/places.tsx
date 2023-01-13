@@ -56,6 +56,12 @@ export const createPlaceAPI = async (data: IPlace): Promise<any> => {
     await firestore().collection('places').add(data);
 };
 
+export const editPlaceAPI = async (data: IPlace): Promise<any> => {
+    const newData = { ...data };
+    delete newData?.id;
+    await firestore().collection('places').doc(data?.id).set(newData);
+};
+
 export const deletePlaceAPI = async (id: string): Promise<any> => {
     await firestore().collection('places').doc(id).delete();
 };

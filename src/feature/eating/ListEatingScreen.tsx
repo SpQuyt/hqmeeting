@@ -1,7 +1,13 @@
 import { Keyboard, StyleSheet, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Icon, Header, Text as TextElement, ButtonGroup, Input, Button } from 'react-native-elements';
-import { createPlaceAPI, deletePlaceAPI, getListCategoriesAPI, getListEatAPI } from 'api/modules/api-app/places';
+import {
+    createPlaceAPI,
+    deletePlaceAPI,
+    editPlaceAPI,
+    getListCategoriesAPI,
+    getListEatAPI,
+} from 'api/modules/api-app/places';
 import { StyledList } from 'components/base';
 import { Themes } from 'assets/themes';
 import { iconButtonStyle, titleHeaderStyle } from 'utilities/staticData';
@@ -17,7 +23,6 @@ import ModalFormAddPlaces from 'components/common/ModalFormAddPlaces';
 import AlertMessage from 'components/base/AlertMessage';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import ModalFilter from 'components/common/ModalFilter';
-import { isEqual } from 'lodash';
 
 const ListEatingScreen = () => {
     const [selectedModeIndex, setSelectedModeIndex] = useState(0);
@@ -26,7 +31,7 @@ const ListEatingScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [filterObject, setFilterObject] = useState<IFilter>({
         keyword: '',
-        visited: undefined,
+        visited: false,
         false_place: undefined,
         currentCategoriesArr: [],
     });
@@ -74,6 +79,15 @@ const ListEatingScreen = () => {
         }
     };
 
+    const editUserData = async (data: IPlace) => {
+        try {
+            await editPlaceAPI(data);
+        } catch (err) {
+            AlertMessage(`${err}`);
+            console.log(err);
+        }
+    };
+
     const handleRefresh = async () => {
         try {
             setIsRefreshing(true);
@@ -102,27 +116,34 @@ const ListEatingScreen = () => {
             const newCategoriesTextOnly = newCategories?.filter(item => item?.isChecked)?.map(item => item?.name);
             return newCategoriesTextOnly?.join(', ');
         };
-        if (isEqual(filterObject, defaultFilterObject)) {
-            return null;
-        }
         return (
-            <View style={{ paddingHorizontal: 20 }}>
-                <TextElement>{`Đã tới chưa: ${renderVisited(filterObject?.visited)}`}</TextElement>
-                <TextElement>{`Địa điểm có thật: ${renderFalsePlace(filterObject?.false_place)}`}</TextElement>
-                <TextElement>
-                    {`Thể loại địa điểm: ${renderCategories(filterObject?.currentCategoriesArr)}`}
-                </TextElement>
-            </View>
+            <Row>
+                <View style={{ paddingHorizontal: 20 }}>
+                    <TextElement>{`Đã tới chưa: ${renderVisited(filterObject?.visited)}`}</TextElement>
+                    <TextElement>{`Địa điểm có thật: ${renderFalsePlace(filterObject?.false_place)}`}</TextElement>
+                    <TextElement>
+                        {`Thể loại địa điểm: ${renderCategories(filterObject?.currentCategoriesArr)}`}
+                    </TextElement>
+                </View>
+                <Button
+                    title={isCollapsedAll ? 'Thu gọn tất cả' : 'Mở rộng tất cả'}
+                    onPress={() => {
+                        setIsCollapsedAll(!isCollapsedAll);
+                    }}
+                    containerStyle={{ marginRight: 15, borderRadius: 10 }}
+                    titleStyle={{ fontSize: 14 }}
+                />
+            </Row>
         );
     };
 
     const handleAddPlace = () => {
         modalize.show(
-            'addFood',
+            'addEditFood',
             <ModalFormAddPlaces
                 categoriesArrFromProps={defaultFilterObject?.currentCategoriesArr || []}
                 onConfirm={async data => {
-                    modalize.dismiss('addFood');
+                    modalize.dismiss('addEditFood');
                     await addUserData(data);
                     await getUserData(filterObject);
                 }}
@@ -164,13 +185,6 @@ const ListEatingScreen = () => {
                     <TextElement h4 h4Style={titleHeaderStyle}>
                         Danh sách ăn uống
                     </TextElement>
-                }
-                rightComponent={
-                    <Row fullWidth={false}>
-                        <TouchableOpacity style={iconButtonStyle} onPress={handleAddPlace}>
-                            <Icon name="add" color="white" />
-                        </TouchableOpacity>
-                    </Row>
                 }
             />
             <Row justify="flex-end" fullWidth={false}>
@@ -243,20 +257,10 @@ const ListEatingScreen = () => {
                         );
                     }}
                 />
-                <Space size="l" />
-            </Row>
-            <Row justify="flex-end">
-                <Button
-                    title={isCollapsedAll ? 'Thu gọn tất cả' : 'Mở rộng tất cả'}
-                    onPress={() => {
-                        setIsCollapsedAll(!isCollapsedAll);
-                    }}
-                    containerStyle={{ marginRight: 15, borderRadius: 10 }}
-                    titleStyle={{ fontSize: 14 }}
-                />
+                <Space />
             </Row>
             {renderFilterSummaryText()}
-            <Space />
+            <Space size="l" />
             <View style={{ flex: 1 }}>
                 {selectedModeIndex === 0 ? (
                     <StyledList
@@ -271,6 +275,33 @@ const ListEatingScreen = () => {
                                     isCollapsedAllFromProps={isCollapsedAll}
                                     onPress={curItem => {
                                         navigate(TAB_NAVIGATION_ROOT.EATING_ROUTE.DETAILS, { itemFromRoute: curItem });
+                                    }}
+                                    onEdit={curItem => {
+                                        modalize.show(
+                                            'addEditFood',
+                                            <ModalFormAddPlaces
+                                                dataFromEdit={curItem}
+                                                categoriesArrFromProps={defaultFilterObject?.currentCategoriesArr || []}
+                                                onConfirm={async data => {
+                                                    modalize.dismiss('addEditFood');
+                                                    await editUserData(data);
+                                                    await getUserData(filterObject);
+                                                }}
+                                            />,
+                                            {
+                                                modalStyle: {
+                                                    backgroundColor: Themes.COLORS.blue,
+                                                },
+                                                closeOnOverlayTap: false,
+                                                adjustToContentHeight: true,
+                                                disableScrollIfPossible: false,
+                                                containerStyleCenter: {
+                                                    justifyContent: 'flex-end',
+                                                    alignItems: 'center',
+                                                },
+                                                panGestureEnabled: false,
+                                            },
+                                        );
                                     }}
                                     onDelete={async curItem => {
                                         try {

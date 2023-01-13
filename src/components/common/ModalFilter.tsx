@@ -60,7 +60,6 @@ const ModalFilter = ({
                 <ListItemTitle>Đã tới hay chưa?</ListItemTitle>
                 <Row justify="center">
                     <CheckBox
-                        style={iconButtonStyle}
                         onPress={() =>
                             setCurrentFilter({
                                 ...currentFilter,
@@ -73,7 +72,6 @@ const ModalFilter = ({
                         uncheckedIcon={<Icon name="radio-button-unchecked" color={Themes.COLORS.primary} />}
                     />
                     <CheckBox
-                        style={iconButtonStyle}
                         onPress={() =>
                             setCurrentFilter({
                                 ...currentFilter,
@@ -86,7 +84,6 @@ const ModalFilter = ({
                         uncheckedIcon={<Icon name="radio-button-unchecked" color={Themes.COLORS.primary} />}
                     />
                     <CheckBox
-                        style={iconButtonStyle}
                         onPress={() =>
                             setCurrentFilter({
                                 ...currentFilter,

@@ -1,7 +1,9 @@
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable no-restricted-syntax */
 import { ScrollView, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Metrics from 'assets/metrics';
-import { Button, CheckBox, Icon, Input } from 'react-native-elements';
+import { AirbnbRating, Button, CheckBox, Icon, Input } from 'react-native-elements';
 import { TextElement } from 'react-native-elements/dist/text/Text';
 import { iconButtonStyle } from 'utilities/staticData';
 import ModalizeManager from 'components/base/modal/ModalizeManager';
@@ -16,10 +18,11 @@ import Space from './Space';
 
 interface IProps {
     categoriesArrFromProps: Array<{ name: string; isChecked: boolean }>;
+    dataFromEdit?: IPlace;
     onConfirm(data: IPlace): void;
 }
 
-const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps }: IProps) => {
+const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps, dataFromEdit }: IProps) => {
     const modalize = ModalizeManager();
     const [data, setData] = useState<IPlace>({
         name: '',
@@ -46,10 +49,32 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps }: IProps) => {
     >(categoriesArrFromProps);
 
     useEffect(() => {
+        if (data?.categories && data?.categories?.length > 0) {
+            let newCateGoriesArr = [...categoriesArrFromProps];
+            for (const cateNameItem of data?.categories) {
+                newCateGoriesArr = newCateGoriesArr.map(newItem => {
+                    if (cateNameItem === newItem?.name) {
+                        return {
+                            ...newItem,
+                            isChecked: true,
+                        };
+                    }
+                    return newItem;
+                });
+            }
+            setCurrentCategoriesArr(newCateGoriesArr);
+            return;
+        }
         if (!isEqual(categoriesArrFromProps, currentCategoriesArr)) {
             setCurrentCategoriesArr(categoriesArrFromProps);
         }
-    }, [categoriesArrFromProps]);
+    }, [categoriesArrFromProps, data?.categories]);
+
+    useEffect(() => {
+        if (dataFromEdit && !isEqual(dataFromEdit, data)) {
+            setData(dataFromEdit);
+        }
+    }, [dataFromEdit]);
 
     return (
         <View style={{ height: Metrics.screenHeight * 0.9, padding: 10 }}>
@@ -58,7 +83,7 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps }: IProps) => {
                 <TouchableOpacity
                     style={iconButtonStyle}
                     onPress={() => {
-                        modalize.dismiss('addFood');
+                        modalize.dismiss('addEditFood');
                     }}
                 >
                     <Icon name="close" color="black" />
@@ -107,6 +132,7 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps }: IProps) => {
                     onChangeText={text => {
                         setData({ ...data, name: text });
                     }}
+                    labelStyle={{ color: Themes.COLORS.black }}
                 />
                 <Input
                     label="Link video (*)"
@@ -114,6 +140,7 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps }: IProps) => {
                     onChangeText={text => {
                         setData({ ...data, link_video: text });
                     }}
+                    labelStyle={{ color: Themes.COLORS.black }}
                 />
                 <Input
                     label="Địa chỉ (*)"
@@ -121,14 +148,68 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps }: IProps) => {
                     onChangeText={text => {
                         setData({ ...data, road: text });
                     }}
+                    labelStyle={{ color: Themes.COLORS.black }}
                 />
+                <View>
+                    <TextElement style={{ marginLeft: 10, fontSize: 16, fontWeight: '700' }}>
+                        Đã tới hay chưa (*)
+                    </TextElement>
+                    <Row justify="center">
+                        <CheckBox
+                            onPress={() =>
+                                setData({
+                                    ...data,
+                                    visited: true,
+                                })
+                            }
+                            title="Đã tới"
+                            checked={data?.visited === true}
+                            checkedIcon={<Icon name="radio-button-checked" color={Themes.COLORS.primary} />}
+                            uncheckedIcon={<Icon name="radio-button-unchecked" color={Themes.COLORS.primary} />}
+                        />
+                        <CheckBox
+                            onPress={() =>
+                                setData({
+                                    ...data,
+                                    visited: false,
+                                })
+                            }
+                            title="Chưa tới"
+                            checked={data?.visited === false}
+                            checkedIcon={<Icon name="radio-button-checked" color={Themes.COLORS.primary} />}
+                            uncheckedIcon={<Icon name="radio-button-unchecked" color={Themes.COLORS.primary} />}
+                        />
+                    </Row>
+                    <Space size="l" />
+                </View>
+                <View>
+                    <TextElement style={{ marginLeft: 10, fontSize: 16, fontWeight: '700' }}>Đánh giá</TextElement>
+                    <Space />
+                    <Row justify="flex-start">
+                        <Space />
+                        <AirbnbRating
+                            showRating={false}
+                            count={5}
+                            defaultRating={data?.rating || 0}
+                            size={40}
+                            onFinishRating={result => {
+                                setData({
+                                    ...data,
+                                    rating: result,
+                                });
+                            }}
+                        />
+                    </Row>
+                    <Space size="l" />
+                    <Space size="l" />
+                </View>
                 {data?.type === TypePlace?.FOOD ? (
                     <View>
                         <TextElement style={{ marginLeft: 10, fontSize: 16, fontWeight: '700' }}>
                             Thể loại món ăn (*)
                         </TextElement>
                         <Space />
-                        <Row>
+                        <Row justify="flex-start">
                             {currentCategoriesArr?.map(cateItem => {
                                 return (
                                     <CheckBox
@@ -161,14 +242,14 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps }: IProps) => {
                     </View>
                 ) : null}
                 <Button
-                    title={'Tạo mới'}
+                    title={dataFromEdit ? 'Chỉnh sửa' : 'Tạo mới'}
                     onPress={() => {
                         const cateChosenArr = currentCategoriesArr?.filter(item => item?.isChecked);
                         if (data?.name && data?.link_video && data?.road && cateChosenArr?.length > 0) {
                             onConfirm({
                                 ...data,
                                 categories: cateChosenArr?.map(item => item?.name),
-                                created_at: Number(dayjs().unix()),
+                                created_at: dataFromEdit ? data?.created_at : Number(dayjs().unix()),
                                 last_updated_at: Number(dayjs().unix()),
                             });
                             return;
