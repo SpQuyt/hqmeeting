@@ -1,6 +1,7 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import ListEatingScreen from 'feature/eating/ListEatingScreen';
+import ListGameScreen from 'feature/game/ListGameScreen';
 import ListPlanningScreen from 'feature/planning/ListPlanningScreen';
 import ListPlayingScreen from 'feature/playing/ListPlayingScreen';
 import SettingScreen from 'feature/setting/SettingScreen';
@@ -28,6 +29,11 @@ const PlanningStack = () => (
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.PLANNING_ROUTE.LIST} component={ListPlanningScreen} />
     </MainStack.Navigator>
 );
+const GamingStack = () => (
+    <MainStack.Navigator screenOptions={navigationConfigs}>
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.GAMING_ROUTE.LIST} component={ListGameScreen} />
+    </MainStack.Navigator>
+);
 const SettingsStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.SETTINGS} component={SettingScreen} />
@@ -44,7 +50,7 @@ const MainTabContainer = () => {
         },
         {
             name: TAB_NAVIGATION_ROOT.PLAYING_ROUTE.ROOT,
-            title: 'Vui chơi',
+            title: 'Du lịch',
             component: PlayingStack,
             icon: 'tour',
         },
@@ -53,6 +59,12 @@ const MainTabContainer = () => {
             title: 'Kế hoạch',
             component: PlanningStack,
             icon: 'list-alt',
+        },
+        {
+            name: TAB_NAVIGATION_ROOT.GAMING_ROUTE.ROOT,
+            title: 'Trò chơi',
+            component: GamingStack,
+            icon: 'games',
         },
         {
             name: TAB_NAVIGATION_ROOT.SETTING_ROUTE.ROOT,

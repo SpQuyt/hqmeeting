@@ -39,7 +39,7 @@ const StyledTabBar = ({ state, descriptors, navigation }: any) => {
                         onPress={onPress}
                         onLongPress={onLongPress}
                         key={route.key}
-                        customStyle={[styles.tabButton]}
+                        customStyle={[styles.tabButton, { width: `${100 / Number(state?.routes?.length || 1)}%` }]}
                     >
                         <Icon
                             name={options?.icon}
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
     },
     tabButton: {
         alignItems: 'center',
-        width: '25%',
     },
     tabIcon: {
         width: 17,
