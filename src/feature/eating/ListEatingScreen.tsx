@@ -1,4 +1,4 @@
-import { Keyboard, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Keyboard, StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Icon, Header, Text as TextElement, ButtonGroup, Input, Button } from 'react-native-elements';
 import {
@@ -23,6 +23,7 @@ import ModalFormAddPlaces from 'components/common/ModalFormAddPlaces';
 import AlertMessage from 'components/base/AlertMessage';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import ModalFilter from 'components/common/ModalFilter';
+import FloatingButton from 'components/common/FloatingButton';
 
 const ListEatingScreen = () => {
     const [selectedModeIndex, setSelectedModeIndex] = useState(0);
@@ -320,9 +321,7 @@ const ListEatingScreen = () => {
                     />
                 ) : null}
             </View>
-            <TouchableOpacity style={[iconButtonStyle, styles.floatButton]} onPress={handleAddPlace}>
-                <Icon name="add" color="white" size={40} />
-            </TouchableOpacity>
+            <FloatingButton onPress={handleAddPlace} />
         </View>
     );
 };
@@ -332,15 +331,5 @@ export default ListEatingScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    floatButton: {
-        width: Metrics.screenWidth * 0.15,
-        aspectRatio: 1,
-        bottom: Metrics.screenHeight * 0.03,
-        right: Metrics.screenWidth * 0.05,
-        borderRadius: Metrics.screenWidth * 0.2,
-        backgroundColor: Themes.COLORS.primary,
-        justifyContent: 'center',
-        position: 'absolute',
     },
 });
