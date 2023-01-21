@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { IPlace } from 'utilities/CommonInterface';
 import Space from 'components/common/Space';
@@ -41,7 +41,9 @@ const ItemPlace = ({ item, isCollapsedAllFromProps, onPress, onDelete, onEdit }:
         >
             <ListItem.Content>
                 <Row>
-                    <ListItem.Title style={{ fontWeight: 'bold' }}>{item?.name}</ListItem.Title>
+                    <View style={{ width: '70%' }}>
+                        <ListItem.Title style={{ fontWeight: 'bold' }}>{item?.name}</ListItem.Title>
+                    </View>
                     <Row fullWidth={false}>
                         <TouchableOpacity
                             style={iconButtonStyle}

@@ -98,64 +98,62 @@ const ModalFilter = ({
                 </Row>
             </View>
             <Space size="l" />
-            {typePlace === TypePlace?.FOOD ? (
-                <View>
-                    <ListItemTitle>Thể loại món ăn (cuộn xuống để xem thêm)</ListItemTitle>
-                    <Space />
-                    <View style={{ height: Metrics.screenHeight * 0.2, width: '100%' }}>
-                        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                            <Row>
-                                {currentFilter?.currentCategoriesArr?.map(cateItem => {
-                                    return (
-                                        <CheckBox
-                                            key={cateItem?.name}
-                                            style={iconButtonStyle}
-                                            onPress={() => {
-                                                setCurrentFilter({
-                                                    ...currentFilter,
-                                                    currentCategoriesArr: currentFilter?.currentCategoriesArr?.map(
-                                                        item => {
-                                                            if (item?.name === cateItem?.name) {
-                                                                return {
-                                                                    ...item,
-                                                                    isChecked: !item?.isChecked,
-                                                                };
-                                                            }
-                                                            return item;
-                                                        },
-                                                    ),
-                                                });
-                                            }}
-                                            title={cateItem?.name}
-                                            checked={cateItem?.isChecked}
-                                            checkedIcon={<Icon name="check-box" color={Themes.COLORS.primary} />}
-                                            uncheckedIcon={
-                                                <Icon name="check-box-outline-blank" color={Themes.COLORS.primary} />
-                                            }
-                                        />
-                                    );
-                                })}
-                            </Row>
-                        </ScrollView>
-                    </View>
-                    <Space size="l" />
-                    <Button
-                        title={'Lọc'}
-                        onPress={() => {
-                            onConfirm(currentFilter);
-                        }}
-                    />
-                    <Space size="l" />
-                    <Button
-                        type="outline"
-                        onPress={() => {
-                            setCurrentFilter(defaultFilterObjectFromProps);
-                        }}
-                        title={'Làm mới bộ lọc'}
-                        icon={<Icon name="refresh" color="white" />}
-                    />
+            <View>
+                <ListItemTitle>
+                    Thể loại {typePlace === TypePlace.FOOD ? 'món ăn' : 'du lịch'} (cuộn xuống để xem thêm)
+                </ListItemTitle>
+                <Space />
+                <View style={{ height: Metrics.screenHeight * 0.2, width: '100%' }}>
+                    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                        <Row>
+                            {currentFilter?.currentCategoriesArr?.map(cateItem => {
+                                return (
+                                    <CheckBox
+                                        key={cateItem?.name}
+                                        style={iconButtonStyle}
+                                        onPress={() => {
+                                            setCurrentFilter({
+                                                ...currentFilter,
+                                                currentCategoriesArr: currentFilter?.currentCategoriesArr?.map(item => {
+                                                    if (item?.name === cateItem?.name) {
+                                                        return {
+                                                            ...item,
+                                                            isChecked: !item?.isChecked,
+                                                        };
+                                                    }
+                                                    return item;
+                                                }),
+                                            });
+                                        }}
+                                        title={cateItem?.name}
+                                        checked={cateItem?.isChecked}
+                                        checkedIcon={<Icon name="check-box" color={Themes.COLORS.primary} />}
+                                        uncheckedIcon={
+                                            <Icon name="check-box-outline-blank" color={Themes.COLORS.primary} />
+                                        }
+                                    />
+                                );
+                            })}
+                        </Row>
+                    </ScrollView>
                 </View>
-            ) : null}
+                <Space size="l" />
+                <Button
+                    title={'Lọc'}
+                    onPress={() => {
+                        onConfirm(currentFilter);
+                    }}
+                />
+                <Space size="l" />
+                <Button
+                    type="outline"
+                    onPress={() => {
+                        setCurrentFilter(defaultFilterObjectFromProps);
+                    }}
+                    title={'Làm mới bộ lọc'}
+                    icon={<Icon name="refresh" color="white" />}
+                />
+            </View>
         </View>
     );
 };

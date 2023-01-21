@@ -17,12 +17,14 @@ import Row from './Row';
 import Space from './Space';
 
 interface IProps {
+    typeFromProps: TypePlace;
+    modalId: 'addEditFood' | 'addEditPlay';
     categoriesArrFromProps: Array<{ name: string; isChecked: boolean }>;
     dataFromEdit?: IPlace;
     onConfirm(data: IPlace): void;
 }
 
-const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps, dataFromEdit }: IProps) => {
+const ModalFormAddPlaces = ({ modalId, typeFromProps, onConfirm, categoriesArrFromProps, dataFromEdit }: IProps) => {
     const modalize = ModalizeManager();
     const [data, setData] = useState<IPlace>({
         name: '',
@@ -71,6 +73,13 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps, dataFromEdit }:
     }, [categoriesArrFromProps, data?.categories]);
 
     useEffect(() => {
+        setData({
+            ...data,
+            type: typeFromProps,
+        });
+    }, [typeFromProps]);
+
+    useEffect(() => {
         if (dataFromEdit && !isEqual(dataFromEdit, data)) {
             setData(dataFromEdit);
         }
@@ -83,7 +92,7 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps, dataFromEdit }:
                 <TouchableOpacity
                     style={iconButtonStyle}
                     onPress={() => {
-                        modalize.dismiss('addEditFood');
+                        modalize.dismiss(modalId);
                     }}
                 >
                     <Icon name="close" color="black" />
@@ -99,32 +108,26 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps, dataFromEdit }:
                     Loại địa điểm (*)
                 </TextElement>
                 <Row justify="center">
-                    <CheckBox
-                        style={iconButtonStyle}
-                        onPress={() =>
-                            setData({
-                                ...data,
-                                type: TypePlace.FOOD,
-                            })
-                        }
-                        title="Ăn uống"
-                        checked={data?.type === TypePlace.FOOD}
-                        checkedIcon={<Icon name="radio-button-checked" color={Themes.COLORS.primary} />}
-                        uncheckedIcon={<Icon name="radio-button-unchecked" color={Themes.COLORS.primary} />}
-                    />
-                    <CheckBox
-                        style={iconButtonStyle}
-                        onPress={() =>
-                            setData({
-                                ...data,
-                                type: TypePlace.PLAY,
-                            })
-                        }
-                        title="Vui chơi"
-                        checked={data?.type === TypePlace.PLAY}
-                        checkedIcon={<Icon name="radio-button-checked" color={Themes.COLORS.primary} />}
-                        uncheckedIcon={<Icon name="radio-button-unchecked" color={Themes.COLORS.primary} />}
-                    />
+                    {typeFromProps === TypePlace.FOOD ? (
+                        <CheckBox
+                            disabled
+                            style={iconButtonStyle}
+                            title="Ăn uống"
+                            checked={data?.type === TypePlace.FOOD}
+                            checkedIcon={<Icon name="radio-button-checked" color={Themes.COLORS.primary} />}
+                            uncheckedIcon={<Icon name="radio-button-unchecked" color={Themes.COLORS.primary} />}
+                        />
+                    ) : null}
+                    {typeFromProps === TypePlace.PLAY ? (
+                        <CheckBox
+                            disabled
+                            style={iconButtonStyle}
+                            title="Vui chơi"
+                            checked={data?.type === TypePlace.PLAY}
+                            checkedIcon={<Icon name="radio-button-checked" color={Themes.COLORS.primary} />}
+                            uncheckedIcon={<Icon name="radio-button-unchecked" color={Themes.COLORS.primary} />}
+                        />
+                    ) : null}
                 </Row>
                 <Input
                     label="Tên địa điểm (*)"
@@ -203,44 +206,42 @@ const ModalFormAddPlaces = ({ onConfirm, categoriesArrFromProps, dataFromEdit }:
                     <Space size="l" />
                     <Space size="l" />
                 </View>
-                {data?.type === TypePlace?.FOOD ? (
-                    <View>
-                        <TextElement style={{ marginLeft: 10, fontSize: 16, fontWeight: '700' }}>
-                            Thể loại món ăn (*)
-                        </TextElement>
-                        <Space />
-                        <Row justify="flex-start">
-                            {currentCategoriesArr?.map(cateItem => {
-                                return (
-                                    <CheckBox
-                                        key={cateItem?.name}
-                                        style={iconButtonStyle}
-                                        onPress={() => {
-                                            setCurrentCategoriesArr(
-                                                currentCategoriesArr?.map(item => {
-                                                    if (item?.name === cateItem?.name) {
-                                                        return {
-                                                            ...item,
-                                                            isChecked: !item?.isChecked,
-                                                        };
-                                                    }
-                                                    return item;
-                                                }),
-                                            );
-                                        }}
-                                        title={cateItem?.name}
-                                        checked={cateItem?.isChecked}
-                                        checkedIcon={<Icon name="check-box" color={Themes.COLORS.primary} />}
-                                        uncheckedIcon={
-                                            <Icon name="check-box-outline-blank" color={Themes.COLORS.primary} />
-                                        }
-                                    />
-                                );
-                            })}
-                        </Row>
-                        <Space size="l" />
-                    </View>
-                ) : null}
+                <View>
+                    <TextElement style={{ marginLeft: 10, fontSize: 16, fontWeight: '700' }}>
+                        Thể loại {`${typeFromProps === TypePlace.FOOD ? 'món ăn' : 'du lịch'}`} (*)
+                    </TextElement>
+                    <Space />
+                    <Row justify="flex-start">
+                        {currentCategoriesArr?.map(cateItem => {
+                            return (
+                                <CheckBox
+                                    key={cateItem?.name}
+                                    style={iconButtonStyle}
+                                    onPress={() => {
+                                        setCurrentCategoriesArr(
+                                            currentCategoriesArr?.map(item => {
+                                                if (item?.name === cateItem?.name) {
+                                                    return {
+                                                        ...item,
+                                                        isChecked: !item?.isChecked,
+                                                    };
+                                                }
+                                                return item;
+                                            }),
+                                        );
+                                    }}
+                                    title={cateItem?.name}
+                                    checked={cateItem?.isChecked}
+                                    checkedIcon={<Icon name="check-box" color={Themes.COLORS.primary} />}
+                                    uncheckedIcon={
+                                        <Icon name="check-box-outline-blank" color={Themes.COLORS.primary} />
+                                    }
+                                />
+                            );
+                        })}
+                    </Row>
+                    <Space size="l" />
+                </View>
                 <Button
                     title={dataFromEdit ? 'Chỉnh sửa' : 'Tạo mới'}
                     onPress={() => {

@@ -5,7 +5,7 @@ import {
     createPlaceAPI,
     deletePlaceAPI,
     editPlaceAPI,
-    getListCategoriesAPI,
+    getListCategoriesEatAPI,
     getListEatAPI,
 } from 'api/modules/api-app/places';
 import { StyledList } from 'components/base';
@@ -24,6 +24,7 @@ import AlertMessage from 'components/base/AlertMessage';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import ModalFilter from 'components/common/ModalFilter';
 import FloatingButton from 'components/common/FloatingButton';
+import { TypePlace } from 'utilities/enum';
 
 const ListEatingScreen = () => {
     const [selectedModeIndex, setSelectedModeIndex] = useState(0);
@@ -51,7 +52,7 @@ const ListEatingScreen = () => {
 
     const getListCategoriesData = async () => {
         try {
-            const newListCategories = await getListCategoriesAPI();
+            const newListCategories = await getListCategoriesEatAPI();
             const newFreshFilterObject = {
                 ...filterObject,
                 currentCategoriesArr: newListCategories?.map((item: any) => {
@@ -119,7 +120,7 @@ const ListEatingScreen = () => {
         };
         return (
             <Row>
-                <View style={{ paddingHorizontal: 20 }}>
+                <View style={{ paddingHorizontal: 20, width: '60%' }}>
                     <TextElement>{`Đã tới chưa: ${renderVisited(filterObject?.visited)}`}</TextElement>
                     <TextElement>{`Địa điểm có thật: ${renderFalsePlace(filterObject?.false_place)}`}</TextElement>
                     <TextElement>
@@ -142,6 +143,8 @@ const ListEatingScreen = () => {
         modalize.show(
             'addEditFood',
             <ModalFormAddPlaces
+                modalId="addEditFood"
+                typeFromProps={TypePlace.FOOD}
                 categoriesArrFromProps={defaultFilterObject?.currentCategoriesArr || []}
                 onConfirm={async data => {
                     modalize.dismiss('addEditFood');
@@ -281,6 +284,8 @@ const ListEatingScreen = () => {
                                         modalize.show(
                                             'addEditFood',
                                             <ModalFormAddPlaces
+                                                modalId="addEditFood"
+                                                typeFromProps={TypePlace.FOOD}
                                                 dataFromEdit={curItem}
                                                 categoriesArrFromProps={defaultFilterObject?.currentCategoriesArr || []}
                                                 onConfirm={async data => {
