@@ -5,52 +5,52 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Switch to build_ios lane" time="0.00117">
+      <testcase classname="fastlane.lanes" name="0: Switch to build_ios lane" time="0.000109">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: get_provisioning_profile" time="16.852786">
+      <testcase classname="fastlane.lanes" name="1: get_provisioning_profile" time="13.256636">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: update_code_signing_settings" time="0.104004">
+      <testcase classname="fastlane.lanes" name="2: update_code_signing_settings" time="0.053455">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: build_app" time="846.516596">
+      <testcase classname="fastlane.lanes" name="3: build_app" time="110.279498">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: Switch to upload_ios lane" time="0.0006">
+      <testcase classname="fastlane.lanes" name="4: Switch to upload_ios lane" time="0.000329">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: Switch to handle_upload_google_drive lane" time="0.000382">
+      <testcase classname="fastlane.lanes" name="5: Switch to handle_upload_google_drive lane" time="6.6e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: upload_to_google_drive" time="12.661258">
+      <testcase classname="fastlane.lanes" name="6: upload_to_google_drive" time="18.516553">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: Switch to handle_upload_install_on_air lane" time="0.000282">
+      <testcase classname="fastlane.lanes" name="7: Switch to handle_upload_install_on_air lane" time="0.000457">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: installonair" time="29.320372">
+      <testcase classname="fastlane.lanes" name="8: installonair" time="71.877642">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="9: Switch to notify_ms_team_ios lane" time="0.00024">
+      <testcase classname="fastlane.lanes" name="9: Switch to notify_ms_team_ios lane" time="0.00044">
         
       </testcase>
     

@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 // import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import Reactotron from '../../ReactotronConfig';
+// import Reactotron from '../../ReactotronConfig';
 import rootSaga from './sagas/rootSaga';
 
 import resourceReducer from './slices/resourceSlice';
@@ -19,7 +19,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
+    middleware: getDefaultMiddleware =>
         getDefaultMiddleware({
             immutableCheck: false,
             serializableCheck: {
@@ -29,7 +29,7 @@ const store = configureStore({
             // .concat(logger)
             .prepend(sagaMiddleware),
     devTools: __DEV__,
-    enhancers: [(Reactotron as any).createEnhancer()],
+    // enhancers: [(Reactotron as any).createEnhancer()],
 });
 
 sagaMiddleware.run(rootSaga);

@@ -5,12 +5,13 @@ platform :ios, '13.0'
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'hqmeetingapp' do
-  use_frameworks!
+  use_frameworks! :linkage => :static
   config = use_native_modules!
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils'
+  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.3.0'
 
   # Flags change depending on the env values.
   flags = get_default_flags()

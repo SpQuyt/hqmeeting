@@ -17,9 +17,9 @@ import { Themes } from 'assets/themes';
 
 LogBox.ignoreLogs(['Require cycle:', 'ViewPropTypes']);
 
-if (__DEV__) {
-    import('../ReactotronConfig').then(() => console.log('Reactotron Configured'));
-}
+// if (__DEV__) {
+//     import('../ReactotronConfig').then(() => console.log('Reactotron Configured'));
+// }
 
 const App: FunctionComponent = () => {
     const theme = createTheme({

@@ -68,7 +68,7 @@ lane :handle_upload_install_on_air do |options|
   end
 end
 lane :handle_upload_diawi do |options|
-  diawi(
+  diawireborn(
     token: diawi_token,
     file:  options[:file_path],
   )

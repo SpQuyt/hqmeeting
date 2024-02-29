@@ -3,6 +3,6 @@
 # Ensure this file is checked in to source control!
 
 gem 'fastlane-plugin-teams'
-gem 'fastlane-plugin-diawi'
+gem 'fastlane-plugin-diawireborn'
 gem 'fastlane-plugin-installonair'
 gem 'fastlane-plugin-googledrive_spquyt'
